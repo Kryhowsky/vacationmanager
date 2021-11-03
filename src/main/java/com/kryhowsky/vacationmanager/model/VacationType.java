@@ -20,4 +20,5 @@ public class VacationType {
     private Long id;
 
     private String name;
+    private Integer possibleNumberOfDays;
 }
