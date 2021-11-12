@@ -11,21 +11,19 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class VacationRequest {
+public class VacationRequest { // dzień urlopu (LocalDate)
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "vacation_type_id")
     private VacationType vacationType;
 
-    private VacationRequestType vacationRequestType;
+    private VacationRequestStatus vacationRequestStatus;
     private LocalDate startDate;
     private LocalDate endDate;
     private Integer numberOfDays;

@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class VacationType {
+public class VacationType { // zamienić na enum + strategia
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
