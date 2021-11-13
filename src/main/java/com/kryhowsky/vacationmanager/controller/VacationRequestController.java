@@ -26,4 +26,10 @@ public class VacationRequestController {
         return vacationRequestService.addVacationRequest(vacationRequest);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void acceptVacationRequest(@PathVariable Long id) {
+        vacationRequestService.acceptVacationRequest(id);
+    }
+
 }

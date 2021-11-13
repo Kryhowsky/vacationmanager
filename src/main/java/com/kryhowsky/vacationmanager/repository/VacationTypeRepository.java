@@ -1,7 +1,0 @@
-package com.kryhowsky.vacationmanager.repository;
-
-import com.kryhowsky.vacationmanager.model.VacationType;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface VacationTypeRepository extends JpaRepository<VacationType, Long> {
-}

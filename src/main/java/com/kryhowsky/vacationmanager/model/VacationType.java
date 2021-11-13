@@ -1,24 +1,7 @@
 package com.kryhowsky.vacationmanager.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public enum VacationType { // implement strategy
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+    LEAVE, ON_DEMAND, OCCASIONAL, CHILD
 
-@Data
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-public class VacationType { // zamienić na enum + strategia
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
-    private Integer possibleNumberOfDays;
 }

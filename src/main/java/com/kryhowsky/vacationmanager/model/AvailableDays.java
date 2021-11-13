@@ -5,22 +5,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class VacationRequest {
+public class AvailableDays {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Integer year;
+    private Integer numberOfAvailableDays;
+    private Integer onDemandDaysUsed;
+    private Integer occasionalDaysUsed;
+    private Integer childDaysUsed;
+
     @ManyToOne
     private User user;
-
-    private LocalDate dayOfVacation;
-    private VacationType vacationType;
-    private VacationRequestStatus vacationRequestStatus;
 }
