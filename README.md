@@ -44,6 +44,7 @@ To do:
 - Implement validation of fields
 - Implement Security (JWT)
 - Implement Audit (hibernate) possibility to track created by, created date, last updated by, last updated date
+- Implement test (unit, integration)
 - Create frontend app in Angular
 
 ## Contact
