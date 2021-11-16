@@ -1,9 +1,11 @@
 package com.kryhowsky.vacationmanager.controller;
 
-import com.kryhowsky.vacationmanager.model.VacationRequest;
+import com.kryhowsky.vacationmanager.mapper.VacationRequestMapper;
+import com.kryhowsky.vacationmanager.model.dto.VacationRequestDto;
 import com.kryhowsky.vacationmanager.service.VacationRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,17 +15,18 @@ import org.springframework.web.bind.annotation.*;
 public class VacationRequestController {
 
     private final VacationRequestService vacationRequestService;
+    private final VacationRequestMapper vacationRequestMapper;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<VacationRequest> getVacationRequestsPage(@RequestParam int page, @RequestParam int size) {
-        return vacationRequestService.getVacationRequestsPage(page, size);
+    public Page<VacationRequestDto> getVacationRequestsPage(@RequestParam int page, @RequestParam int size) {
+        return vacationRequestService.getVacationRequestsPage(PageRequest.of(page, size)).map(vacationRequestMapper::toDto);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public VacationRequest addVacationRequest(@RequestBody VacationRequest vacationRequest) {
-        return vacationRequestService.addVacationRequest(vacationRequest);
+    public VacationRequestDto addVacationRequest(@RequestBody VacationRequestDto vacationRequest) {
+        return vacationRequestMapper.toDto(vacationRequestService.addVacationRequest(vacationRequestMapper.toEntity(vacationRequest)));
     }
 
     @PutMapping("/{id}")

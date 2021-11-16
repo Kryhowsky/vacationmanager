@@ -6,7 +6,7 @@ import com.kryhowsky.vacationmanager.repository.UserRepository;
 import com.kryhowsky.vacationmanager.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<User> getUsersPage(int page, int size) {
-        return userRepository.findAll(PageRequest.of(page, size));
+    public Page<User> getUsersPage(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
 }

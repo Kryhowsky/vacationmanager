@@ -16,7 +16,7 @@ import com.kryhowsky.vacationmanager.strategy.VacationRequestStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,8 +67,8 @@ public class VacationRequestServiceImpl implements VacationRequestService {
     }
 
     @Override
-    public Page<VacationRequest> getVacationRequestsPage(int page, int size) {
-        return vacationRequestRepository.findAll(PageRequest.of(page, size));
+    public Page<VacationRequest> getVacationRequestsPage(Pageable pageable) {
+        return vacationRequestRepository.findAll(pageable);
     }
 
     @Override
