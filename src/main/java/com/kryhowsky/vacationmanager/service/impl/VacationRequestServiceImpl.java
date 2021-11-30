@@ -1,14 +1,11 @@
 package com.kryhowsky.vacationmanager.service.impl;
 
-import com.kryhowsky.vacationmanager.model.AvailableDays;
-import com.kryhowsky.vacationmanager.model.User;
-import com.kryhowsky.vacationmanager.model.VacationRequest;
-import com.kryhowsky.vacationmanager.model.VacationRequestStatus;
+import com.kryhowsky.vacationmanager.model.*;
 import com.kryhowsky.vacationmanager.repository.VacationRequestRepository;
 import com.kryhowsky.vacationmanager.service.AvailableDaysService;
 import com.kryhowsky.vacationmanager.service.UserService;
 import com.kryhowsky.vacationmanager.service.VacationRequestService;
-import com.kryhowsky.vacationmanager.strategy.VacationRequestFactory;
+import com.kryhowsky.vacationmanager.strategy.generic.VacationRequestFactory;
 import com.kryhowsky.vacationmanager.strategy.VacationRequestStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +26,7 @@ public class VacationRequestServiceImpl implements VacationRequestService {
     private final VacationRequestRepository vacationRequestRepository;
     private final AvailableDaysService availableDaysService;
     private final UserService userService;
-    private final VacationRequestFactory vacationRequestFactory;
+    private final VacationRequestFactory<VacationType, VacationRequestStrategy> vacationRequestFactory;
 
     @Override
     public VacationRequest addVacationRequest(VacationRequest vacationRequest) {
