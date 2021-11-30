@@ -21,6 +21,10 @@ public class VacationRequest {
     private User user;
 
     private LocalDate dayOfVacation;
+
+    @Enumerated(EnumType.STRING)
     private VacationType vacationType;
+
+
     private VacationRequestStatus vacationRequestStatus;
 }

@@ -8,10 +8,7 @@ import com.kryhowsky.vacationmanager.repository.VacationRequestRepository;
 import com.kryhowsky.vacationmanager.service.AvailableDaysService;
 import com.kryhowsky.vacationmanager.service.UserService;
 import com.kryhowsky.vacationmanager.service.VacationRequestService;
-import com.kryhowsky.vacationmanager.strategy.Impl.ChildStrategy;
-import com.kryhowsky.vacationmanager.strategy.Impl.LeaveStrategy;
-import com.kryhowsky.vacationmanager.strategy.Impl.OccasionalStrategy;
-import com.kryhowsky.vacationmanager.strategy.Impl.OnDemandStrategy;
+import com.kryhowsky.vacationmanager.strategy.VacationRequestFactory;
 import com.kryhowsky.vacationmanager.strategy.VacationRequestStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +29,7 @@ public class VacationRequestServiceImpl implements VacationRequestService {
     private final VacationRequestRepository vacationRequestRepository;
     private final AvailableDaysService availableDaysService;
     private final UserService userService;
+    private final VacationRequestFactory vacationRequestFactory;
 
     @Override
     public VacationRequest addVacationRequest(VacationRequest vacationRequest) {
@@ -63,7 +61,7 @@ public class VacationRequestServiceImpl implements VacationRequestService {
             return vacationRequestRepository.save(vacationRequest);
         }
 
-        return null; // TODO: CREATED STATUS IS RETURNED
+        return null; // TODO: CREATED STATUS IS RETURNED (status not accepted)
     }
 
     @Override
@@ -111,28 +109,13 @@ public class VacationRequestServiceImpl implements VacationRequestService {
 
     private boolean validateRequest(VacationRequest vacationRequest) {
 
-        VacationRequestStrategy vacationRequestStrategy;
+        VacationRequestStrategy vacationRequestStrategy = vacationRequestFactory.getStrategyByType(vacationRequest.getVacationType());
 
-        switch (vacationRequest.getVacationType()) {
-            case LEAVE:
-                vacationRequestStrategy = new LeaveStrategy(availableDaysService);
-                break;
-
-            case ON_DEMAND:
-                vacationRequestStrategy = new OnDemandStrategy(availableDaysService);
-                break;
-
-            case OCCASIONAL:
-                vacationRequestStrategy = new OccasionalStrategy(availableDaysService);
-                break;
-
-            case CHILD:
-                vacationRequestStrategy = new ChildStrategy(availableDaysService);
-                break;
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + vacationRequest.getVacationType());
-        }
+            if (vacationRequestStrategy.canBePlaced(vacationRequest)) {
+                return true;
+            } else {
+                // TODO: ???
+            }
 
         return vacationRequestStrategy.canBePlaced(vacationRequest);
     }

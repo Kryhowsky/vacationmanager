@@ -1,10 +1,13 @@
 package com.kryhowsky.vacationmanager.strategy.Impl;
 
 import com.kryhowsky.vacationmanager.model.VacationRequest;
+import com.kryhowsky.vacationmanager.model.VacationType;
 import com.kryhowsky.vacationmanager.service.AvailableDaysService;
 import com.kryhowsky.vacationmanager.strategy.VacationRequestStrategy;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @RequiredArgsConstructor
 public class OccasionalStrategy implements VacationRequestStrategy {
 
@@ -21,6 +24,11 @@ public class OccasionalStrategy implements VacationRequestStrategy {
         }
 
         return availableDaysForUser.get().getOccasionalDaysUsed() < 2;
+    }
+
+    @Override
+    public VacationType getType() {
+        return VacationType.OCCASIONAL;
     }
 
 }
