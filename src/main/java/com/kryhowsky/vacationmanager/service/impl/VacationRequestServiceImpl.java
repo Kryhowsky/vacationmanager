@@ -1,5 +1,6 @@
 package com.kryhowsky.vacationmanager.service.impl;
 
+import com.kryhowsky.vacationmanager.exception.VacationRequestException;
 import com.kryhowsky.vacationmanager.model.*;
 import com.kryhowsky.vacationmanager.repository.VacationRequestRepository;
 import com.kryhowsky.vacationmanager.service.AvailableDaysService;
@@ -58,7 +59,7 @@ public class VacationRequestServiceImpl implements VacationRequestService {
             return vacationRequestRepository.save(vacationRequest);
         }
 
-        return null; // TODO: CREATED STATUS IS RETURNED (status not accepted)
+        throw new VacationRequestException("Vacation Request cannot be placed");
     }
 
     @Override
